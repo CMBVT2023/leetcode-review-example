@@ -52,3 +52,58 @@ function validPalindromeV2(s) {
 // Biggest takeaway, by far, writing out the pseudo code and working on other problems involving pointers has greatly helped when it comes to solving problems that require similar approaches. While it
 // is not wise to try and carbon copy one of my solutions to another problem directly to a new one, it is best to try and adapt it instead. Knowing how to implement a previous point problem solution
 // and adapt it to this helps to show me that I should focus more on working with similar problems to further my knowledge as opposed to jumping around sporadically learning.
+
+// Initializes all html element from the webpage.
+const initialDisplay = document.getElementById('initial-display');
+const resultDisplay = document.getElementById('result-display');
+const radioOptions = document.getElementById('radio-options').querySelectorAll('input');
+const userInput = document.getElementById('text-input');
+
+// Displays the result of the algorithm.
+function displayResult() {
+    // Displays the initial string from the user in the initialDisplay element.
+    initialDisplay.innerHTML = userInput.value;
+
+    // Displays the result from the algorithm in the resultDisplay.
+    resultDisplay.innerHTML = validPalindromeV2(userInput.value);
+}
+
+// Sets the textbox value to a predefined string, based on the value passed in.
+function pushString(num) {
+    // Initializes a variable to store the string that will be passed to the algorithm.
+    let string = "";
+    // Checks the value of the number passed into the function
+    // and sets the variable equal to the number's associated array.
+    if (num == 0) {
+        string = "A man, a plan, a canal: Panama";
+    } else if (num == 1) {
+        string = "race a car";
+    } else if (num == 2) {
+        string = " ";
+    } else if (num == 3) {
+        string = "race car";
+    }
+
+    // Sets the userInput to the preset string.
+    userInput.value = string;
+
+    // Calls the function to display the algorithm's result.
+    displayResult(userInput.value);
+}
+
+// Loads all of the eventListeners for the webpage.
+function loadEventListeners() {
+    // Iterates through all of the radio options and initializes an eventListener for each.
+    for (const radio of radioOptions) {
+        radio.addEventListener('change', () => {
+            pushString(radio.value);
+        })
+    }
+
+    // Initializes an eventListener for the userInput element
+    userInput.addEventListener('change', () => {
+        displayResult();
+    })
+}
+
+loadEventListeners();
